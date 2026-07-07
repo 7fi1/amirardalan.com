@@ -1,6 +1,6 @@
-# amirardalan.com
+# portfolio (amir.sh)
 
-Amir Ardalan's personal website built with [Startup](https://github.com/amirardalan/startup). This is a Markdown Blog and CMS written in TypeScript with React Server Components. Create, edit, and manage blog posts and categories inside a custom CMS. Update static posts without a build leveraging the power of on-demand revalidation.
+A personal website built with [Startup](https://github.com/amirardalan/startup). This is a Markdown Blog and CMS written in TypeScript with React Server Components. Create, edit, and manage blog posts and categories inside a custom CMS. Update static posts without a build leveraging the power of on-demand revalidation.
 
 ### Stack
 
