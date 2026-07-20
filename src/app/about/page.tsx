@@ -58,8 +58,7 @@ export default function About() {
           </h1>
           <div className="mt-7 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
             <p>
-              I like being involved early, while a product is still taking shape. I work across interaction design and frontend engineering, using each to inform the other. I care about clarity, intrigue, thoughtful details, and software that respects the people using it.
-
+              I like being involved early, while a product is still taking shape. I work across interaction design and frontend engineering, using each to inform the other.
             </p>
             <p>
               I care about clarity, intrigue, thoughtful details, and software that respects the people using it.
