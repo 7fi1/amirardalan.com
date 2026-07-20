@@ -95,10 +95,11 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
 
   return (
     <div>
-      <div className="scrollbar-hide mb-3 flex space-x-4 overflow-x-auto text-xxs uppercase text-dark dark:text-light">
+      <div className="scrollbar-hide mb-4 flex space-x-4 overflow-x-auto text-xxs uppercase text-dark dark:text-light">
         {allCategories.map((category) => (
           <Link
             key={category}
+            onClick={() => setCurrentPage(1)}
             href={
               category === 'all'
                 ? '/blog'
@@ -115,43 +116,65 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
           </Link>
         ))}
       </div>
-      <input
-        type="text"
-        placeholder="Search posts..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-2 w-full rounded-lg border border-zinc-300 bg-zinc-100 p-2 text-dark outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-light"
-      />
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          {searchTerm && (
+      <div className="relative">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 20 20"
+          fill="none"
+          className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400"
+        >
+          <circle
+            cx="8.5"
+            cy="8.5"
+            r="5.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <path
+            d="m12.5 12.5 4 4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+        <input
+          type="text"
+          aria-label="Search writing"
+          placeholder="Search writing"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="w-full rounded-xl border border-zinc-200 bg-zinc-50/70 py-3 pl-10 pr-4 text-sm text-dark outline-none transition-colors placeholder:text-zinc-400 focus:border-primary focus:ring-1 focus:ring-primary dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-light dark:placeholder:text-zinc-500"
+        />
+      </div>
+      {searchTerm && (
+        <div className="mt-3 flex items-center justify-between">
+          <div>
             <p className="text-sm text-dark dark:text-light">
               {filteredPosts.length + (showFeaturedPost ? 1 : 0)} result
               {filteredPosts.length + (showFeaturedPost ? 1 : 0) !== 1
                 ? 's'
                 : ''}
             </p>
-          )}
-        </div>
-        <div className="flex space-x-2">
-          {searchTerm && (
+          </div>
+          <div className="flex space-x-2">
             <button
               onClick={handleClearFilters}
-              title="Clear Search"
+              title="Clear search"
               className="flex items-center"
             >
               <IconClose size={20} color="var(--color-primary)" />
               <span className="pl-1 text-sm text-dark dark:text-light">
-                Clear Search
+                Clear
               </span>
             </button>
-          )}
+          </div>
         </div>
-      </div>
+      )}
       {paginatedPosts.length > 0 || showFeaturedPost ? (
-        <ul
-          className={clsx('pb-8 pt-6 last-of-type:mb-12', searchTerm && 'pt-2')}
-        >
+        <ul className="mb-8 mt-6 border-b border-zinc-200 dark:border-zinc-800">
           {showFeaturedPost && (
             <BlogPostCard post={featuredPost} featured={true} />
           )}
@@ -161,14 +184,14 @@ export default function BlogPosts({ posts }: { posts: BlogPost[] }) {
         </ul>
       ) : (
         <p className="pt-6 text-dark dark:text-light">
-          No posts match your search.
+          No posts match that search.
         </p>
       )}
       <ClientPagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
-        className="mb-16"
+        className="mb-10"
       />
     </div>
   );
