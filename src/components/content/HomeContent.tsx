@@ -21,10 +21,10 @@ export default function HomeContent() {
               <SectionGlyph /> Design Engineer
             </p>
             <h1 className="text-balance font-serif text-5xl font-normal italic leading-[0.98] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-              I design and engineer thoughtful software.
+              I design products and build them.
             </h1>
             <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed text-zinc-600 md:mt-8 md:text-xl dark:text-zinc-300">
-              I’m Amir, a Design Engineer. I take ideas from early exploration through interaction design all the way to production code.
+              I’m Amir. I work across interaction design and frontend engineering, taking products from early ideas to production.
             </p>
             <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-10">
               <a
