@@ -149,7 +149,7 @@ export default function HomeContent() {
             <p className="max-w-3xl text-xl font-normal leading-relaxed text-zinc-800 sm:text-2xl dark:text-zinc-200">
               I’ve collaborated with teams at Nike’s LeBron James Innovation
               Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN
-              Footwear through BASIC/DEPT®.
+              Footwear &amp; BASIC/DEPT®.
             </p>
             <div className="mt-7 flex flex-wrap gap-x-8 gap-y-4 text-sm uppercase tracking-wide md:mt-8">
               <Link

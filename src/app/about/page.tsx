@@ -145,7 +145,7 @@ export default function About() {
           <p className="mt-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
             I’ve collaborated with teams at Nike’s LeBron James Innovation
             Center, Columbia Sportswear Company, Mountain Hardwear, and KEEN
-            Footwear through BASIC/DEPT®. I also build independent products
+            Footwear &amp; BASIC/DEPT®. I also build independent products
             from initial idea to working software.
           </p>
           <a
