@@ -1,12 +1,17 @@
 'use client';
 
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import { useEffect, useState } from 'react';
 
+// Cloudinary public IDs for the manifold.observer screenshots (folder: Work).
+// Paste the public ID for each screenshot below, e.g. 'Work/manifold-observer-1'.
 const images = [
-  '/images/manifold-observer-3.png',
-  '/images/manifold-observer-2.png',
-  '/images/manifold-observer.png',
+  'Work/manifold-orbital-MNF-09YPON9O_4_uwdfqu',
+  'Work/manifold-mandala-MNF-9LQOWU_2_ggmbwv',
+  'Work/manifold-wormhole-MNF-0NU0MXZC_q5wpta',
+  'Work/manifold-helix-MNF-0EL5C2U8_fmka99',
+  'Work/manifold-observer-3_lvy9qm',
+  'Work/manifold-terrain-MNF-03RSVFL5_fizyhn.png',
 ];
 
 const FRAME_DURATION = 9000;
@@ -45,10 +50,10 @@ export default function ManifoldSlideshow() {
       aria-label="Visit manifold.observer"
       className="relative min-h-[320px] overflow-hidden sm:min-h-[440px] md:col-span-7 lg:min-h-[560px]"
     >
-      {images.map((src, index) => (
-        <Image
-          key={src}
-          src={src}
+      {images.map((publicId, index) => (
+        <CldImage
+          key={publicId}
+          src={publicId}
           alt=""
           fill
           priority={index === 0}
