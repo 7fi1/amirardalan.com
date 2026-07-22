@@ -28,7 +28,7 @@ export const selectedProjects: Project[] = [
       'An audiovisual experiment that gives information another shape. Add a source, change the conditions, and watch a responsive form reorganize in real time.',
     year: '2026',
     role: ['Product design', 'Interaction design', 'Frontend engineering'],
-    status: 'Live project',
+    status: 'Independent project',
     liveUrl: 'https://manifold.observer',
     caseStudyUrl: '/blog/manifold-observer',
     media: [

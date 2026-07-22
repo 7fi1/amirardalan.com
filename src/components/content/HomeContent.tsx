@@ -89,21 +89,33 @@ export default function HomeContent() {
                   }`}
                 >
                   <div>
+                    {(project.status || project.year) && (
+                      <div className="mb-5 flex items-center gap-3 font-mono text-xxs uppercase tracking-[0.16em]">
+                        {project.status && (
+                          <span className="flex items-center gap-2 text-[var(--color-primary-dark)]">
+                            <SectionGlyph className="text-[var(--color-primary-dark)]" />
+                            {project.status}
+                          </span>
+                        )}
+                        {project.status && project.year && (
+                          <span
+                            className="h-px w-5 bg-white/20"
+                            aria-hidden="true"
+                          />
+                        )}
+                        {project.year && (
+                          <span className="text-white/45">{project.year}</span>
+                        )}
+                      </div>
+                    )}
                     <h3 className="text-3xl font-medium leading-tight md:text-2xl lg:text-4xl">
                       {project.title}
                     </h3>
                     <p className="mt-4 max-w-lg text-base font-normal leading-relaxed text-white/70 md:mt-6">
                       {project.summary}
                     </p>
-                    {(project.status || project.year) && (
-                      <p className="mt-6 font-mono text-xxs uppercase leading-relaxed tracking-wide text-white/60">
-                        {[project.status, project.year]
-                          .filter(Boolean)
-                          .join(' · ')}
-                      </p>
-                    )}
                     {project.role && project.role.length > 0 && (
-                      <p className="mt-2 text-xxs uppercase leading-relaxed tracking-wide text-white/60">
+                      <p className="mt-6 text-xxs uppercase leading-relaxed tracking-wide text-white/50">
                         {project.role.join(' · ')}
                       </p>
                     )}
@@ -209,33 +221,6 @@ export default function HomeContent() {
                 View resume <Arrow external />
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="border-t border-zinc-200 dark:border-zinc-800"
-        aria-labelledby="contact-heading"
-      >
-        <div className="mx-auto grid max-w-[1440px] gap-5 px-6 py-10 md:grid-cols-12 md:items-center md:gap-10 md:px-10 md:py-12 lg:px-16 lg:py-14">
-          <div className="md:col-span-4">
-            <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400">
-              <SectionGlyph /> Contact
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between md:col-span-8">
-            <h2
-              id="contact-heading"
-              className="text-2xl font-medium leading-tight text-zinc-800 md:text-3xl dark:text-zinc-200"
-            >
-              Have a project in mind?
-            </h2>
-            <a
-              href="mailto:hi@amir.sh"
-              className="group inline-flex shrink-0 items-center gap-3 text-sm tracking-wide text-primary"
-            >
-              hi@amir.sh <Arrow external />
-            </a>
           </div>
         </div>
       </section>

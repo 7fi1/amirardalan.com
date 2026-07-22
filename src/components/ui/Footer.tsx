@@ -4,8 +4,8 @@ import Logo from '@/components/ui/Logo';
 export default async function Footer() {
   return (
     <footer className="z-10 border-t border-black/10 bg-gradient-to-br from-zinc-50 via-zinc-100 to-pink-100/70 text-sm text-dark dark:border-white/10 dark:from-zinc-900 dark:via-zinc-900 dark:to-fuchsia-950/40 dark:text-light">
-      <div className="flex w-full flex-row items-center px-6 py-4 lg:px-10 lg:py-6">
-        <div className="mr-6 flex flex-row items-center">
+      <div className="flex w-full flex-row items-center gap-4 px-6 py-4 md:gap-6 lg:px-10 lg:py-6">
+        <div className="flex shrink-0 flex-row items-center">
           <span className="mr-4" aria-label="Copyright">
             &copy;{new Date().getFullYear()}
           </span>
@@ -18,6 +18,19 @@ export default async function Footer() {
             <NavLinks variant="footer" />
           </nav>
         </div>
+        <a
+          href="mailto:hi@amir.sh"
+          aria-label="Email Amir at hi@amir.sh"
+          className="group ml-auto inline-flex shrink-0 items-center gap-2.5 rounded-full border border-black/10 bg-white/50 px-4 py-2 text-xs tracking-wide text-primary transition-colors hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+        >
+          Get in touch
+          <span
+            className="transition-transform group-hover:translate-x-0.5"
+            aria-hidden="true"
+          >
+            →
+          </span>
+        </a>
       </div>
     </footer>
   );
