@@ -16,7 +16,7 @@ export default function ShareOnXButton({
   return (
     <button
       onClick={handleShare}
-      className="flex items-center text-zinc-500 dark:text-zinc-400"
+      className="flex cursor-pointer items-center text-zinc-500 dark:text-zinc-400"
       aria-label="Share on X"
     >
       <IconX size={20} aria-hidden="true" />
