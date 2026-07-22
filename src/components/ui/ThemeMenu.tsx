@@ -5,13 +5,16 @@ import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@/store/theme';
 import { Theme } from '@/types/theme';
-import Tooltip from '@/components/ui/Tooltip';
 
 export default function ThemeMenu() {
   const router = useRouter();
   const { theme, setTheme, initializeTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+  const [menuPosition, setMenuPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
   const menuRef = useRef<HTMLDivElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -22,16 +25,16 @@ export default function ThemeMenu() {
     const button = buttonRef.current;
     if (!button) return;
 
-    const menuWidth = 144;
     const viewportPadding = 8;
     const buttonRect = button.getBoundingClientRect();
 
     setMenuPosition({
       top: buttonRect.bottom + 8,
       left: Math.min(
-        Math.max(viewportPadding, buttonRect.right - menuWidth),
-        window.innerWidth - menuWidth - viewportPadding
+        Math.max(viewportPadding, buttonRect.left),
+        window.innerWidth - buttonRect.width - viewportPadding
       ),
+      width: buttonRect.width,
     });
   }, []);
 
@@ -128,10 +131,6 @@ export default function ThemeMenu() {
     router.refresh();
   };
 
-  const closeTooltip = () => {
-    buttonRef.current?.blur();
-  };
-
   const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     shouldManageFocusRef.current = event.detail === 0;
     if (!menuOpen) updateMenuPosition();
@@ -143,39 +142,37 @@ export default function ThemeMenu() {
 
   return (
     <div className="relative" ref={menuRef} onKeyDown={handleKeyDown}>
-      <Tooltip pos="b" text="Change theme" onClose={closeTooltip}>
-        <button
-          id="theme-menu-button"
-          className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/40 px-3 py-2 text-xs text-dark transition-colors hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:text-light dark:hover:bg-white/10"
-          onClick={toggleMenu}
-          ref={buttonRef}
-          aria-haspopup="menu"
-          aria-expanded={menuOpen}
-          aria-label={`Theme, current selection: ${themeLabel}`}
+      <button
+        id="theme-menu-button"
+        className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/40 px-3 py-2 text-xs text-dark transition-colors hover:bg-white/80 dark:border-white/10 dark:bg-white/5 dark:text-light dark:hover:bg-white/10"
+        onClick={toggleMenu}
+        ref={buttonRef}
+        aria-haspopup="menu"
+        aria-expanded={menuOpen}
+        aria-label={`Theme, current selection: ${themeLabel}`}
+      >
+        <span className="hidden md:inline">Theme:</span>
+        <span>{themeLabel}</span>
+        <svg
+          className={`size-3 transition-transform ${menuOpen ? 'rotate-180' : ''}`}
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
         >
-          <span className="hidden md:inline">Theme:</span>
-          <span>{themeLabel}</span>
-          <svg
-            className={`size-3 transition-transform ${menuOpen ? 'rotate-180' : ''}`}
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="m2.5 4.5 3.5 3 3.5-3"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </Tooltip>
+          <path
+            d="m2.5 4.5 3.5 3 3.5-3"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
       {menuOpen &&
         createPortal(
           <div
             ref={menuPanelRef}
-            className="fixed z-[100] w-36 overflow-clip rounded-xl border border-zinc-200/80 bg-light p-1 shadow-xl dark:border-zinc-700/80 dark:bg-zinc-900 dark:text-light"
+            className="fixed z-[100] overflow-clip rounded-xl border border-zinc-200/80 bg-light p-1 shadow-xl dark:border-zinc-700/80 dark:bg-zinc-900 dark:text-light"
             style={menuPosition}
             role="menu"
             aria-orientation="vertical"

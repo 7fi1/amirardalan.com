@@ -99,7 +99,7 @@ export default function HomeContent() {
                         )}
                         {project.status && project.year && (
                           <span
-                            className="h-px w-5 bg-white/20"
+                            className="h-px w-5 bg-white/25"
                             aria-hidden="true"
                           />
                         )}

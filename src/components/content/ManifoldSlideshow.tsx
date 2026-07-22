@@ -99,19 +99,42 @@ export default function ManifoldSlideshow({
       </a>
 
       {images.length > 1 && (
-        <div className="absolute bottom-4 right-4 z-10 flex overflow-hidden rounded-full bg-zinc-950/75 text-light backdrop-blur-sm">
+        <div className="absolute bottom-4 right-4 z-10 flex items-stretch overflow-hidden rounded-lg bg-zinc-950/60 font-mono text-light shadow-md shadow-black/20 backdrop-blur-xl">
+          <div
+            className="flex items-center gap-1.5 border-r border-white/10 px-3 text-xxs tabular-nums text-white/45"
+            aria-hidden="true"
+          >
+            <span className="text-white/90">
+              {String(activeIndex + 1).padStart(2, '0')}
+            </span>
+            <span>/</span>
+            <span>{String(images.length).padStart(2, '0')}</span>
+          </div>
           <button
             type="button"
             onClick={showPrevious}
-            className="flex h-11 w-11 items-center justify-center border-r border-white/15"
+            className="flex h-10 w-10 items-center justify-center border-r border-white/10 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Show previous project image"
           >
-            <span aria-hidden="true">←</span>
+            <svg
+              className="size-4"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="m9.5 4-4 4 4 4M5.5 8h6"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
           <button
             type="button"
             onClick={() => setIsPaused((paused) => !paused)}
-            className="flex h-11 w-11 items-center justify-center border-r border-white/15 disabled:text-white/50"
+            className="flex h-10 w-10 items-center justify-center border-r border-white/10 text-white/70 transition-colors hover:bg-white/10 hover:text-white disabled:text-white/30 disabled:hover:bg-transparent"
             aria-label={
               reduceMotion
                 ? 'Slideshow paused for reduced motion'
@@ -122,17 +145,51 @@ export default function ManifoldSlideshow({
             aria-pressed={isPaused || reduceMotion}
             disabled={reduceMotion}
           >
-            <span aria-hidden="true">
-              {isPaused || reduceMotion ? '▶' : 'Ⅱ'}
-            </span>
+            {isPaused || reduceMotion ? (
+              <svg
+                className="size-4"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path d="m6 4.5 5 3.5-5 3.5v-7Z" fill="currentColor" />
+              </svg>
+            ) : (
+              <svg
+                className="size-4"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 4.5v7M10 4.5v7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            )}
           </button>
           <button
             type="button"
             onClick={showNext}
-            className="flex h-11 w-11 items-center justify-center"
+            className="flex h-10 w-10 items-center justify-center text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Show next project image"
           >
-            <span aria-hidden="true">→</span>
+            <svg
+              className="size-4"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="m6.5 4 4 4-4 4M10.5 8h-6"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         </div>
       )}
