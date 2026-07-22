@@ -63,7 +63,7 @@ export default function About() {
           <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-primary">
             <SectionGlyph /> About
           </p>
-          <h1 className="mt-6 text-balance font-serif text-4xl font-normal italic leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-balance font-serif text-4xl font-normal italic leading-[1.1] sm:text-5xl lg:text-6xl">
             I’m Amir. I turn ideas into working products.
           </h1>
           <div className="mt-7 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-300">
@@ -80,25 +80,25 @@ export default function About() {
         </header>
 
         <section className="mt-12 lg:mt-16" aria-labelledby="process-heading">
-          <div className="rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-6 text-light sm:p-8 dark:to-fuchsia-950/25">
+          <div className="rounded-3xl bg-linear-to-br from-zinc-900 via-zinc-900 to-fuchsia-950/40 p-6 text-light sm:p-8 dark:to-fuchsia-950/25">
             <p className="flex items-center gap-2.5 text-xxs uppercase tracking-[0.22em] text-zinc-400">
-              <SectionGlyph className="text-[var(--color-primary-dark)]" /> How
+              <SectionGlyph className="text-(--color-primary-dark)" /> How
               I work
             </p>
             <h2
               id="process-heading"
-              className="mt-4 max-w-2xl text-balance font-serif text-3xl font-normal italic leading-snug sm:mx-2 sm:text-4xl"
+              className="mt-4 max-w-2xl text-balance font-serif text-[2rem] font-normal italic leading-[1.2] sm:mx-2 sm:text-[2.5rem]"
             >
               I keep possibilities open and the work grounded.
             </h2>
 
-            <ol className="mt-8 sm:mx-2">
+            <ol className="mt-7 sm:mx-2">
               {process.map((step) => (
                 <li
                   key={step.number}
                   className="grid gap-3 border-t border-white/10 py-6 first:border-t-0 sm:grid-cols-[3rem_1fr] sm:items-baseline sm:gap-5"
                 >
-                  <span className="font-mono text-xs text-[var(--color-primary-dark)] sm:relative sm:-top-0.5">
+                  <span className="font-mono text-xs text-(--color-primary-dark) sm:relative sm:-top-0.5">
                     {step.number}
                   </span>
                   <div>
