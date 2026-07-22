@@ -27,7 +27,7 @@ export default function ThemeMenu() {
 
     const viewportPadding = 8;
     const buttonRect = button.getBoundingClientRect();
-    const menuWidth = window.innerWidth < 768 ? 208 : 184;
+    const menuWidth = 112;
 
     setMenuPosition({
       top: buttonRect.bottom + 8,
@@ -151,13 +151,8 @@ export default function ThemeMenu() {
   const themeOptions: Array<{
     value: Theme;
     label: string;
-    description?: string;
   }> = [
-    {
-      value: 'system',
-      label: 'Automatic',
-      description: `Device setting · ${effectiveThemeLabel}`,
-    },
+    { value: 'system', label: 'Auto' },
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
   ];
@@ -244,15 +239,8 @@ export default function ThemeMenu() {
                 role="menuitemradio"
                 aria-checked={theme === option.value}
               >
-                <span className="flex flex-col gap-0.5">
-                  <span className="text-xxs tracking-[0.08em] uppercase">
-                    {option.label}
-                  </span>
-                  {option.description && (
-                    <span className="font-sans text-[10px] tracking-normal text-zinc-500 uppercase dark:text-zinc-400">
-                      {option.description}
-                    </span>
-                  )}
+                <span className="text-xxs tracking-[0.08em] uppercase">
+                  {option.label}
                 </span>
                 {theme === option.value && (
                   <span
