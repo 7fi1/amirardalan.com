@@ -16,6 +16,7 @@
 
 # vercel
 .vercel
+vercel.json
 
 # next.js
 /.next/
