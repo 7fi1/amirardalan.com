@@ -18,6 +18,7 @@ export default function ThemeMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const systemButtonRef = useRef<HTMLSpanElement>(null);
   const firstItemRef = useRef<HTMLButtonElement>(null);
   const shouldManageFocusRef = useRef(false);
 
@@ -27,14 +28,21 @@ export default function ThemeMenu() {
 
     const viewportPadding = 8;
     const buttonRect = button.getBoundingClientRect();
+    const systemButtonWidth =
+      systemButtonRef.current?.getBoundingClientRect().width ??
+      buttonRect.width;
+    const menuWidth =
+      window.innerWidth < 768
+        ? Math.max(buttonRect.width, systemButtonWidth)
+        : buttonRect.width;
 
     setMenuPosition({
       top: buttonRect.bottom + 8,
       left: Math.min(
         Math.max(viewportPadding, buttonRect.left),
-        window.innerWidth - buttonRect.width - viewportPadding
+        window.innerWidth - menuWidth - viewportPadding
       ),
-      width: buttonRect.width,
+      width: menuWidth,
     });
   }, []);
 
@@ -168,11 +176,19 @@ export default function ThemeMenu() {
           />
         </svg>
       </button>
+      <span
+        ref={systemButtonRef}
+        className="pointer-events-none invisible absolute left-0 top-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-transparent px-3 py-2 text-xs md:hidden"
+        aria-hidden="true"
+      >
+        <span>System</span>
+        <span className="size-3 shrink-0" />
+      </span>
       {menuOpen &&
         createPortal(
           <div
             ref={menuPanelRef}
-            className="fixed z-[100] overflow-clip rounded-xl border border-zinc-200/80 bg-light p-1 shadow-xl dark:border-zinc-700/80 dark:bg-zinc-900 dark:text-light"
+            className="fixed z-[100] overflow-clip rounded-lg bg-white/60 p-1 font-mono ring-1 ring-inset ring-black/[0.06] backdrop-blur-2xl dark:bg-zinc-950/50 dark:text-light dark:ring-white/[0.08]"
             style={menuPosition}
             role="menu"
             aria-orientation="vertical"
@@ -182,13 +198,18 @@ export default function ThemeMenu() {
               <button
                 key={t}
                 ref={index === 0 ? firstItemRef : null}
-                className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs capitalize transition-colors hover:bg-zinc-100 dark:text-light dark:hover:bg-zinc-800 ${theme === t ? 'bg-zinc-100 text-primary dark:bg-zinc-800 dark:text-primary' : ''}`}
+                className={`flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-xxs uppercase tracking-[0.08em] transition-colors hover:bg-black/5 hover:text-dark dark:hover:bg-white/[0.07] dark:hover:text-light ${theme === t ? 'bg-black/[0.035] text-primary dark:bg-white/[0.05] dark:text-primary' : 'text-zinc-600 dark:text-zinc-300'}`}
                 onClick={(event) => handleThemeChange(t, event.detail === 0)}
                 role="menuitemradio"
                 aria-checked={theme === t}
               >
                 <span>{t}</span>
-                {theme === t && <span aria-hidden="true">✓</span>}
+                {theme === t && (
+                  <span
+                    className="size-1 rounded-full bg-current"
+                    aria-hidden="true"
+                  />
+                )}
               </button>
             ))}
           </div>,
